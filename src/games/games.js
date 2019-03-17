@@ -23,21 +23,6 @@ class Games extends Component {
         };
     }
 
-    componentDidMount() {
-        fetch("http://localhost:8080/api/products")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        games: result
-                    });
-                },
-                (error) => {
-                    console.log(error);
-                })
-    }
-
     render() {
         const items = this.state.games;
         let itemsHtml;
@@ -58,7 +43,7 @@ class Games extends Component {
                                 </CardContent>
                             </CardActionArea>
                             <CardActions>
-                                <Button size="small" onClick={() => this.addToCart(game.id)}>
+                                <Button size="small" onClick={() => this.addToCart(game)}>
                                     Kaufen
                                 </Button>
                                 <Button size="small" onClick={() => this.linkToDetail(game.id)}>
@@ -84,6 +69,21 @@ class Games extends Component {
         );
     }
 
+    componentDidMount() {
+        fetch("http://localhost:8080/api/products")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        games: result
+                    });
+                },
+                (error) => {
+                    console.log(error);
+                })
+    }
+
     linkToDetail(id) {
         console.log(id);
 
@@ -93,9 +93,11 @@ class Games extends Component {
         });
     }
 
-    addToCart(itemId) {
-        console.log(itemId + "idk");
-        //TODO idk
+    addToCart(game) {
+        fetch("http://localhost:8080/cart/add/" + game, {
+            method: 'PUT'
+        }).then(result=>result.json())
+            .then(items=>this.setState({items}))
     }
 
 }

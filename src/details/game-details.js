@@ -34,6 +34,13 @@ class Details extends Component {
             </div>
         );
     }
+
+    addToCart(itemId) {
+        fetch("http://localhost:8080/cart/add/" + itemId, {
+            method: 'POST'
+        }).then(result=>result.json())
+            .then(items=>this.setState({items}))
+    }
 }
 
 export default Details;

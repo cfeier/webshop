@@ -37,7 +37,7 @@ class Cart extends Component {
                                     </CardContent>
                                 </CardActionArea>
                                 <CardActions>
-                                    <Button size="small" onClick={() => this.removeFromCart(id)}>
+                                    <Button size="small" onClick={() => this.removeFromCart(game)}>
                                         Entfernen
                                     </Button>
                                 </CardActions>
@@ -57,13 +57,33 @@ class Cart extends Component {
     }
 
     componentDidMount() {
-        console.log("get cart");
-        //TODO: idk
+        fetch("http://localhost:8080/api/cart")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        games: result
+                    });
+                },
+                (error) => {
+                    console.log(error);
+                })
     }
 
-    removeFromCart(id) {
-        console.log(id + "remove");
-        //TODO: idk
+    removeFromCart(game) {
+        fetch("http://localhost:8080/api/cart/remove/{game}")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        games: result
+                    });
+                },
+                (error) => {
+                    console.log(error);
+                })
     }
 
 }
