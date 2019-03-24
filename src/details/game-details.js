@@ -16,7 +16,7 @@ class Details extends Component {
                 <Card>
                     <CardActionArea>
                         <CardContent>
-                            <CardMedia image={game.pictureUrl}/>
+                            <img src={game.pictureUrl}/>
                             <Typography variant="h2" component="h2">
                                 {game.name}
                             </Typography>

@@ -36,7 +36,7 @@ class Games extends Component {
                                     <Typography variant="h5" component="h2">
                                         {game.name}
                                     </Typography>
-                                    <CardMedia image={game.pictureUrl}/>
+                                    <img src={game.pictureUrl}/>
                                     <Typography component="h6">
                                         {game.price} .-
                                     </Typography>
